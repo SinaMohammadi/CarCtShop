@@ -3,14 +3,12 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   let { city } = getQuery(event);
-  console.log(city);
   if (!city) city = "";
   const filter = {
     city: city.toLowerCase(),
   };
   filter["city"] = city;
 
-  console.log(filter);
   const data = await prisma.car.findMany({
     where: {
       city: {

@@ -1,6 +1,5 @@
 <script setup>
 const route = useRoute();
-console.log(route.params);
 const { data: cars, refresh } = await useFetchCars(
   route.params.cityName,
   {

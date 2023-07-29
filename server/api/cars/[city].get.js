@@ -21,11 +21,9 @@ export default defineEventHandler((event) => {
     if (maxPrice) {
         filter.price.lte = parseInt(maxPrice)
     }
-    console.log(filter);
     const data = prisma.car.findMany({where: filter})
     if (!data) {
         throw createError({statusCode: 404, statusMessage: `Zero Car Was Found In Your Selected City ${city}`})
     }
-    console.log(data);
     return data
 })

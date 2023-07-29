@@ -1,6 +1,5 @@
 <script setup>
 const { user, signOut } = auth();
-console.log(user);
 </script>
 
 <template>

@@ -34,7 +34,6 @@ export default defineEventHandler(async (event) => {
         image,
         name
     } = await body
-    console.log(body);
     const car = await prisma.car.create({
         data: {
             make,

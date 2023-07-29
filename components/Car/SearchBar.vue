@@ -8,7 +8,6 @@ const handleSearch = () => {
   navigateTo(`/city/${car.serchInput}/car`);
 };
 const handleChange = () => {
-  console.log(car.data);
   setTimeout(async function () {
     car.data = [];
     const { data } = await useApiChange(car.serchInput);
