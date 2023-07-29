@@ -1,5 +1,5 @@
 import Joi from "joi"
-import {PrismaClient} from 'prisma/prisma-client/index'
+import {PrismaClient} from 'prisma/prisma-client/index.js'
 const prisma = new PrismaClient()
 const schema = Joi.object({
     email: Joi.string().email(
