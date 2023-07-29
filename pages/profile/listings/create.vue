@@ -5,6 +5,7 @@ definePageMeta({
 
 const { makes } = useCars();
 const user = useSupabaseUser();
+const supClient = useSupabaseClient();
 const info = useState("adInfo", () => {
   return {
     make: "",
@@ -16,7 +17,7 @@ const info = useState("adInfo", () => {
     seats: "",
     features: "",
     description: "",
-    image: "null",
+    image: null,
   };
 });
 const errorMessage = ref("");
@@ -75,6 +76,13 @@ const isDisabledButtin = computed(() => {
   return false;
 });
 const handleSubmit = async () => {
+  const fileName = Math.floor(Math.random() * 100000000000000);
+  const { data, error } = await supClient.storage
+    .from("carImages")
+    .upload("public/" + fileName, info.value.image);
+    if(error){
+      return errorMessage.value = 'We Got an error while uploading the image'
+    }
   const body = {
     ...info.value,
     features: info.value.features.split(", "),
@@ -84,6 +92,7 @@ const handleSubmit = async () => {
     year: parseInt(info.value.year),
     name: `${info.value.make} ${info.value.model}`,
     listerId: user.value.id,
+    image: data.path,
   };
   delete body.seats;
   try {
@@ -94,6 +103,9 @@ const handleSubmit = async () => {
     navigateTo("/profile/listings");
   } catch (err) {
     errorMessage.value = err.statusMessage;
+    await supClient.storage
+    .from("carImages")
+    .remove(data.path);
   }
 };
 </script>

@@ -3,7 +3,9 @@ definePageMeta({
   layout: "custom",
 });
 const user = useSupabaseUser();
-const { data: listings } = useFetch(`/api/car/listings/user/${user.value.id}`);
+const { data: listings, refresh: refresh } = useFetch(
+  `/api/car/listings/user/${user.value.id}`
+);
 </script>
 
 <template>
@@ -21,6 +23,8 @@ const { data: listings } = useFetch(`/api/car/listings/user/${user.value.id}`);
         v-for="listing in listings"
         :key="listing.id"
         :listing="listing"
+        :refresh="refresh"
+        @refresh="refresh"
       />
     </div>
   </div>
