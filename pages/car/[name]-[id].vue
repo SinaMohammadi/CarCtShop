@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute();
-const { data } = await useApiFetch(`/api/car/${id}`);
+const { data } = await useApiFetch(`/api/car/${route.params.id}`);
 </script>
 <template>
   <div>
