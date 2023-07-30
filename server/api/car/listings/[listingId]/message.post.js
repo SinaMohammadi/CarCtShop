@@ -12,21 +12,20 @@ const schema = Joi.object({
 })
 export default defineEventHandler(async (event) => {
     const body = readBody(event)
-    const {listerId} = event.context.params
+    const {listingId} = event.context.params
     const {error, value} = await schema.validate(body)
     if (error) {
         createError({statusCode: 412, statusMessage: error.message})
     }
     const {message, name, phone, email} = await body
 
-    const car = await prisma.car.create({
+    const item = await prisma.message.create({
         data: {
             message,
             phone,
-            year,
             email,
             name,
-            listerId:+listerId
+            listeingId: +listingId
         }
     })
 

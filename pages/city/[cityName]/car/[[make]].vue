@@ -1,12 +1,12 @@
 <script setup>
 const route = useRoute();
-const { data: cars, refresh } = await useFetchCars(
-  route.params.cityName,
+const { data: cars, refresh } = await useApiFetch(
+  `/api/cars/${route.params.cityName}`,
   {
     minPrice: route.query.minPrice,
     maxPrice: route.query.maxPrice,
     make: route.params.make,
-  },
+  }
 );
 </script>
 <template>

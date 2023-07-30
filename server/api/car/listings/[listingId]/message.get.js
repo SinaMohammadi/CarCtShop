@@ -2,17 +2,17 @@ import {PrismaClient} from "prisma/prisma-client/index.js"
 
 const prisma = new PrismaClient()
 export default defineEventHandler(async (event) => {
-    const {listerId} = event.context.params
+    const {listingId} = event.context.params
 
 
-    return prisma.car.findMany({
+    return prisma.message.findMany({
         where: {
-            id: +listerId
+            listeingId: +listingId
         },
         select: {
             email: true,
+            name: true,
             phone: true,
-            year: true,
             message: true,
             id: true,
         }

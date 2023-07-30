@@ -1,7 +1,6 @@
 <script setup>
-import useFetchCarDetails from "~/composables/useFetchCarDetails";
 const route = useRoute();
-const {data} = await useFetchCarDetails(route.params.id);
+const { data } = await useApiFetch(`/api/car/${id}`);
 </script>
 <template>
   <div>
@@ -10,7 +9,7 @@ const {data} = await useFetchCarDetails(route.params.id);
     >
       <CarDetailsHero :car="data" />
       <div class="mt-10">
-        <CarDetailsContact />
+        <CarDetailsContact :id="route.params.id" />
       </div>
     </div>
   </div>
